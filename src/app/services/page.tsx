@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
-import { useSearchParams } from "next/navigation";
 import { onAuthStateChanged, User } from "firebase/auth";
 import Link from "next/link";
+
+/* ================= TYPES ================= */
 
 type Provider = {
   id: string;
@@ -16,7 +18,23 @@ type Provider = {
   experience: number;
 };
 
+/* ============================================================
+   MAIN PAGE (Suspense Wrapper)
+============================================================ */
+
 export default function ServicesPage() {
+  return (
+    <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+      <ServiceListContent />
+    </Suspense>
+  );
+}
+
+/* ============================================================
+   CONTENT COMPONENT (uses useSearchParams safely)
+============================================================ */
+
+function ServiceListContent() {
   const searchParams = useSearchParams();
   const urlCategory = searchParams.get("category");
 
@@ -30,7 +48,8 @@ export default function ServicesPage() {
   const [user, setUser] = useState<User | null>(null);
 
   // Booking modal states
-  const [selectedProvider, setSelectedProvider] = useState<Provider | null>(null);
+  const [selectedProvider, setSelectedProvider] =
+    useState<Provider | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [bookingLoading, setBookingLoading] = useState(false);
 
@@ -41,7 +60,7 @@ export default function ServicesPage() {
     contact: "",
   });
 
-  // ================= AUTH LISTENER =================
+  /* ================= AUTH LISTENER ================= */
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -50,7 +69,7 @@ export default function ServicesPage() {
     return () => unsub();
   }, []);
 
-  // ================= FETCH PROVIDERS =================
+  /* ================= FETCH PROVIDERS ================= */
   useEffect(() => {
     const fetchProviders = async () => {
       try {
@@ -72,14 +91,14 @@ export default function ServicesPage() {
     fetchProviders();
   }, []);
 
-  // ================= APPLY URL CATEGORY =================
+  /* ================= APPLY URL CATEGORY ================= */
   useEffect(() => {
     if (urlCategory) {
       setCategory(urlCategory);
     }
   }, [urlCategory]);
 
-  // ================= FILTER LOGIC =================
+  /* ================= FILTER LOGIC ================= */
   useEffect(() => {
     let result = providers;
 
@@ -101,7 +120,8 @@ export default function ServicesPage() {
     setFiltered(result);
   }, [search, category, providers]);
 
-  // ================= BOOKING HANDLERS =================
+  /* ================= BOOKING HANDLERS ================= */
+
   const openBookingModal = (provider: Provider) => {
     setSelectedProvider(provider);
     setShowModal(true);
@@ -157,7 +177,7 @@ export default function ServicesPage() {
     }
   };
 
-  // ================= LOADING STATE =================
+  /* ================= LOADING STATE ================= */
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -165,6 +185,8 @@ export default function ServicesPage() {
       </div>
     );
   }
+
+  /* ================= UI ================= */
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-10">
