@@ -1,26 +1,105 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ================================
+   GLOBAL THEME
+================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-slate-50 text-gray-900 antialiased;
 }
+
+/* ================================
+   FORM INPUT FIXES
+================================ */
+
+input,
+textarea,
+select {
+  @apply
+    text-gray-900
+    border
+    border-gray-300
+    rounded-xl
+    px-4
+    py-2
+    bg-white
+    outline-none
+    transition
+    focus:border-blue-600
+    focus:ring-2
+    focus:ring-blue-200;
+}
+
+/* ================================
+   BUTTON SYSTEM
+================================ */
+
+.btn-primary {
+  @apply
+    bg-gradient-to-r
+    from-blue-600
+    to-blue-700
+    text-white
+    font-medium
+    px-5
+    py-2.5
+    rounded-xl
+    shadow-sm
+    hover:brightness-110
+    active:scale-[0.98]
+    transition;
+}
+
+.btn-secondary {
+  @apply
+    border
+    border-gray-300
+    text-gray-700
+    bg-white
+    px-5
+    py-2.5
+    rounded-xl
+    hover:bg-gray-100
+    transition;
+}
+
+/* ================================
+   CARD STYLE
+================================ */
+
+.card {
+  @apply
+    bg-white
+    rounded-2xl
+    shadow-sm
+    border
+    border-gray-100;
+}
+/* ================================
+   NAVBAR LINKS
+================================ */
+
+.nav-link {
+  @apply
+    text-gray-700
+    font-medium
+    hover:text-blue-700
+    transition;
+}
+
+.mobile-link {
+  @apply
+    block
+    text-gray-800
+    font-medium
+    py-2
+    hover:text-blue-700
+    transition;
+}
+
