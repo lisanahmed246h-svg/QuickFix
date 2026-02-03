@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ================================
    GLOBAL THEME
@@ -11,7 +9,8 @@ html {
 }
 
 body {
-  @apply bg-slate-50 text-gray-900 antialiased;
+  @apply bg-gray-50 text-gray-900 antialiased;
+
 }
 
 /* ================================
@@ -74,32 +73,10 @@ select {
 ================================ */
 
 .card {
-  @apply
+  @apply 
     bg-white
     rounded-2xl
     shadow-sm
     border
     border-gray-100;
 }
-/* ================================
-   NAVBAR LINKS
-================================ */
-
-.nav-link {
-  @apply
-    text-gray-700
-    font-medium
-    hover:text-blue-700
-    transition;
-}
-
-.mobile-link {
-  @apply
-    block
-    text-gray-800
-    font-medium
-    py-2
-    hover:text-blue-700
-    transition;
-}
-
