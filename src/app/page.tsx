@@ -38,46 +38,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white text-gray-800">
-      {/* ================= NAVBAR ================= */}
-      <nav className="flex items-center justify-between px-6 py-4 shadow-sm border-b">
-        <h1 className="text-2xl font-bold text-blue-900">QuickFix</h1>
-
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="/services" className="hover:text-blue-700 font-medium">
-  Find Services
-</Link>
-          <Link href="/become-provider" className="hover:text-blue-700 font-medium">
-  Become a Provider
-</Link>
-          
-          {/* ইউজার লগইন থাকলে নাম এবং লগআউট দেখাবে, নয়তো লগইন বাটন */}
-          {user ? (
-  <div className="flex items-center gap-4 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-    {/* এখানে নতুন ড্যাশবোর্ড লিঙ্কটি যোগ করা হয়েছে */}
-    <Link href="/dashboard" className="text-blue-900 font-bold hover:text-blue-700 text-sm transition-colors border-r border-blue-200 pr-3">
-      Dashboard
-    </Link>
-    
-    <span className="font-semibold text-blue-900 text-sm">
-      Hi, {user.email?.split('@')[0]} 
-    </span>
-    
-    <button 
-      onClick={handleLogout}
-      className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1.5 rounded-md transition shadow-sm"
-    >
-      Logout
-    </button>
-  </div>
-) : (
-  <Link href="/auth">
-    <button className="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-2 rounded-lg font-bold transition shadow-sm">
-      Login
-    </button>
-  </Link>
-)}
-        </div>
-      </nav>
+      
 
       {/* ================= HERO SECTION ================= */}
       <section className="px-6 py-20 text-center bg-gradient-to-br from-blue-900 to-blue-700 text-white">
