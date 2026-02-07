@@ -88,12 +88,7 @@ export default function Home() {
           Find trusted local experts for all your home and office needs.
         </p>
 
-        <div className="max-w-2xl mx-auto flex bg-white rounded-xl overflow-hidden shadow-2xl">
-          <input
-            type="text"
-            placeholder="Search for a service (e.g. Electrician)..."
-            className="flex-1 px-6 py-4 text-gray-700 outline-none"
-          />
+        
           {/* Search Bar Update */}
 <div className="max-w-2xl mx-auto flex bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-100">
   <input
@@ -106,7 +101,7 @@ export default function Home() {
     <Search className="text-black" />
   </Link>
 </div>
-        </div>
+        
       </section>
 
       {/* ================= SERVICE CATEGORIES ================= */}
